@@ -8,6 +8,7 @@ public class Rectangle {
 	Rectangle (int w, int h) {
 		setSize(w, h);
 	}
+	// メソッド
 	void setSize(int w, int h) {
 		width = w;
 		height = h;
@@ -15,6 +16,11 @@ public class Rectangle {
 	int getArea() {
 		return width * height;
 	}
+	@Override
+	public String toString() {
+	  return "Rectangle(" + width + ", " + height + ")";
+	}
+	// mainメソッド
 	public static void main(String[] args) {
 		Rectangle r1 = new Rectangle();
 		System.out.println("r1.width = " + r1.width);

@@ -10,6 +10,12 @@ public class Rectangle {
   }
   // メソッド
   void setSize(int w, int h) {
+    if(w < 0) {
+      w = 0;
+    }
+    if(h < 0) {
+      h = 0;
+    }
     width = w;
     height = h;
   }

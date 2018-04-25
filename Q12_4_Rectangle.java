@@ -1,4 +1,3 @@
-
 public class Q12_4_Rectangle {
   int width;
   int height;

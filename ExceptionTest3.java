@@ -7,8 +7,8 @@ public class ExceptionTest3 {
   }
 
   static void myAssign(int[] arr, int index, int value) {
+    System.out.println("myAssignに来ました");
     try {
-      System.out.println("myAssignに来ました");
       System.out.println("代入します");
       arr[index] = value;
       System.out.println("代入しました");

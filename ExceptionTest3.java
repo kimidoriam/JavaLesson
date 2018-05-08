@@ -17,7 +17,5 @@ public class ExceptionTest3 {
       System.out.println("例外は" + e + "です");
     }
     System.out.println("myAssignから帰ります");
-
   }
-
 }

@@ -18,5 +18,4 @@ public class ExceptionTest3 {
     }
     System.out.println("myAssignから帰ります");
   }
-
 }

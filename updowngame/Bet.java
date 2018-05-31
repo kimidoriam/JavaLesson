@@ -8,31 +8,27 @@ public class Bet {
   private boolean isValidBet = false; // ベット金額有効判定
   private int bet = 0; // ベット額
 
-  public Bet(int maxBetGold, int wallet) {
+  public Bet(int maxBetGold, int wallet) throws IOException {
     while (!isValidBet) {
 
+      System.out.println("ベットする金額を入力してください。（3万Gまで）");
+      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      String line = reader.readLine();
+
       try {
-        System.out.println("ベットする金額を入力してください。（3万Gまで）");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String line = reader.readLine();
+        bet = Integer.parseInt(line);
 
-        try {
-          bet = Integer.parseInt(line);
-
-          if (bet > maxBetGold) {
-            System.out.println("1度にベットできる金額は3万Gまでです。");
-          } else if (bet > wallet) {
-            System.out.println("所持金を越える金額はベットできません。");
-          } else if (bet <= 0) {
-            System.out.println("1以上の整数で入力してください。");
-          } else {
-            isValidBet = true;
-          }
-        } catch (NumberFormatException e) {
-          System.out.println("整数で入力してください。");
+        if (bet > maxBetGold) {
+          System.out.println("1度にベットできる金額は3万Gまでです。");
+        } else if (bet > wallet) {
+          System.out.println("所持金を越える金額はベットできません。");
+        } else if (bet <= 0) {
+          System.out.println("1以上の整数で入力してください。");
+        } else {
+          isValidBet = true;
         }
-      } catch (IOException e) {
-        System.out.println(e);
+      } catch (NumberFormatException e) {
+        System.out.println("整数で入力してください。");
       }
 
     }

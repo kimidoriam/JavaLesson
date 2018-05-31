@@ -21,7 +21,7 @@ public class UpDownGame {
     int firstNumber, secondNumber; // 問題の数字1, 2
 
     Continuation continuation = new Continuation();
-    while (continuation.getShouldContinueGame()) {
+    while (continuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
       System.out.println("現在の所持金：" + wallet + "G");
 
       try {
@@ -92,10 +92,6 @@ public class UpDownGame {
   private void hasIncorrectAnswer(Bet bet, Answer answer, Continuation continuation) {
     this.wallet = bet.subtractBet(wallet, bet.getBet());
     continuation.setShouldContinueBet(false);
-
-    if (wallet <= GAME_OVER_GOLD) {
-      continuation.setShouldContinueGame(false);
-    }
   }
 
   private void endGame(int wallet) {

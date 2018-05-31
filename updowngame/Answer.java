@@ -29,10 +29,6 @@ public class Answer {
     }
   }
 
-  public boolean getIsValidAnswer() {
-    return isValidAnswer;
-  }
-
   public String getAnswer() {
     return answer;
   }

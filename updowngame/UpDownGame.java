@@ -42,25 +42,25 @@ public class UpDownGame {
 
           case "1":
             if (firstNumber < secondNumber) {
-              wallet = hasCorrectAnswer(bet, UP_DOWN_ODDS, wallet, continuation, answer);
+              hasCorrectAnswer(bet, UP_DOWN_ODDS, wallet, continuation, answer);
             } else {
-              wallet = hasIncorrectAnswer(wallet, bet, answer, continuation);
+              hasIncorrectAnswer(wallet, bet, answer, continuation);
             }
             break;
 
           case "2":
             if (firstNumber > secondNumber) {
-              wallet = hasCorrectAnswer(bet, UP_DOWN_ODDS, wallet, continuation, answer);
+              hasCorrectAnswer(bet, UP_DOWN_ODDS, wallet, continuation, answer);
             } else {
-              wallet = hasIncorrectAnswer(wallet, bet, answer, continuation);
+              hasIncorrectAnswer(wallet, bet, answer, continuation);
             }
             break;
 
           case "3":
             if (firstNumber == secondNumber) {
-              wallet = hasCorrectAnswer(bet, SAME_ODDS, wallet, continuation, answer);
+              hasCorrectAnswer(bet, SAME_ODDS, wallet, continuation, answer);
             } else {
-              wallet = hasIncorrectAnswer(wallet, bet, answer, continuation);
+              hasIncorrectAnswer(wallet, bet, answer, continuation);
             }
             break;
 
@@ -75,7 +75,7 @@ public class UpDownGame {
     endGame(wallet);
   }
 
-  private int hasCorrectAnswer(Bet bet, int odds, int wallet, Continuation continuation, Answer answer) {
+  private void hasCorrectAnswer(Bet bet, int odds, int wallet, Continuation continuation, Answer answer) {
     bet.multiplyBet(odds);
 
     if (bet.getBet() + wallet >= GAME_CLEAR_GOLD) {
@@ -89,11 +89,9 @@ public class UpDownGame {
         bet.setIsValidBet(false);
       }
     }
-
-    return wallet;
   }
 
-  private int hasIncorrectAnswer(int wallet, Bet bet, Answer answer, Continuation continuation) {
+  private void hasIncorrectAnswer(int wallet, Bet bet, Answer answer, Continuation continuation) {
     wallet = bet.subtractBet(wallet, bet.getBet());
     bet.setIsValidBet(false);
     answer.setIsValidAnswer(false);
@@ -102,8 +100,6 @@ public class UpDownGame {
     if (wallet <= GAME_OVER_GOLD) {
       continuation.setShouldContinueGame(false);
     }
-
-    return wallet;
   }
 
   private void endGame(int wallet) {

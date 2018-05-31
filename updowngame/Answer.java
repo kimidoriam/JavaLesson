@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Answer {
-  private boolean isValidAnswer = false; // 回答有効判定
   private String answer = ""; // 回答
 
   public Answer() {
-    while (!isValidAnswer) {
+    while (!isValidAnswer()) {
 
       try {
         System.out.println("UP [1] or DOWN [2] or SAME [3]");
@@ -19,8 +18,6 @@ public class Answer {
 
         if (!(answer.equals("1") || answer.equals("2") || answer.equals("3"))) {
           System.out.println("1, 2, 3のいずれかを入力してください。");
-        } else {
-          isValidAnswer = true;
         }
       } catch (IOException e) {
         System.out.println(e);
@@ -29,11 +26,15 @@ public class Answer {
     }
   }
 
-  public String getAnswer() {
-    return answer;
+  public boolean isValidAnswer() {
+    if (!(answer.equals("1") || answer.equals("2") || answer.equals("3"))) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
-  public void setIsValidAnswer(boolean isValidAnswer) {
-    this.isValidAnswer = isValidAnswer;
+  public String getAnswer() {
+    return answer;
   }
 }

@@ -82,7 +82,6 @@ public class UpDownGame {
       this.wallet = continuation.finishGame(bet, wallet);
     } else {
       continuation.shouldContinueBet();
-      answer.setIsValidAnswer(false);
 
       if (!continuation.getShouldContinueBet()) {
         this.wallet += bet.getBet();
@@ -92,7 +91,6 @@ public class UpDownGame {
 
   private void hasIncorrectAnswer(Bet bet, Answer answer, Continuation continuation) {
     this.wallet = bet.subtractBet(wallet, bet.getBet());
-    answer.setIsValidAnswer(false);
     continuation.setShouldContinueBet(false);
 
     if (wallet <= GAME_OVER_GOLD) {

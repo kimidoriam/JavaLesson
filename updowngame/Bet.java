@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Bet {
-  private boolean isValidBet = false; // ベット金額有効判定
   private int bet = 0; // ベット額
 
   public Bet(int maxBetGold, int wallet) throws IOException {
-    while (!isValidBet) {
+    while (!isValidBet(maxBetGold, wallet)) {
 
       System.out.println("ベットする金額を入力してください。（3万Gまで）");
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -24,8 +23,6 @@ public class Bet {
           System.out.println("所持金を越える金額はベットできません。");
         } else if (bet <= 0) {
           System.out.println("1以上の整数で入力してください。");
-        } else {
-          isValidBet = true;
         }
       } catch (NumberFormatException e) {
         System.out.println("整数で入力してください。");
@@ -34,16 +31,20 @@ public class Bet {
     }
   }
 
-  public boolean getIsValidBet() {
-    return isValidBet;
+  public boolean isValidBet(int maxBetGold, int wallet) {
+    if (bet > maxBetGold) {
+      return false;
+    } else if (bet > wallet) {
+      return false;
+    } else if (bet <= 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   public int getBet() {
     return bet;
-  }
-
-  public void setIsValidBet(boolean isValidBet) {
-    this.isValidBet = isValidBet;
   }
 
   public void multiplyBet(int x) {

@@ -86,14 +86,12 @@ public class UpDownGame {
 
       if (!continuation.getShouldContinueBet()) {
         this.wallet += bet.getBet();
-        bet.setIsValidBet(false);
       }
     }
   }
 
   private void hasIncorrectAnswer(Bet bet, Answer answer, Continuation continuation) {
     this.wallet = bet.subtractBet(wallet, bet.getBet());
-    bet.setIsValidBet(false);
     answer.setIsValidAnswer(false);
     continuation.setShouldContinueBet(false);
 

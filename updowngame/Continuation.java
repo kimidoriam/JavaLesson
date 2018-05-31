@@ -38,10 +38,9 @@ public class Continuation {
   }
 
   public void shouldContinueBet() {
-    boolean isValidChoice = false; // 選択肢有効判定
     String choice = ""; // 選択肢
 
-    while (!isValidChoice) {
+    while (!isValidChoice(choice)) {
 
       try {
         System.out.println("現在のベットでゲームを続けますか？(y/n)");
@@ -51,8 +50,6 @@ public class Continuation {
 
         if (!(choice.equals("y") || choice.equals("n"))) {
           System.out.println("yかnを入力してください。");
-        } else {
-          isValidChoice = true;
         }
       } catch (IOException e) {
         System.out.println(e);
@@ -63,6 +60,14 @@ public class Continuation {
       shouldContinueBet = true;
     } else {
       shouldContinueBet = false;
+    }
+  }
+
+  public boolean isValidChoice(String choice) {
+    if (!(choice.equals("y") || choice.equals("n"))) {
+      return false;
+    } else {
+      return true;
     }
   }
 }

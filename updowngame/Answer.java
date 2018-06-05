@@ -16,7 +16,7 @@ public class Answer {
         String line = reader.readLine();
         answer = line;
 
-        if (!(answer.equals("1") || answer.equals("2") || answer.equals("3"))) {
+        if (!isValidAnswer()) {
           System.out.println("1, 2, 3のいずれかを入力してください。");
         }
       } catch (IOException e) {

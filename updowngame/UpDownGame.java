@@ -39,29 +39,29 @@ public class UpDownGame {
           System.out.println("ANSWER : " + secondNumber);
 
           switch (answer.getAnswer()) {
-          case "1":
-            if (firstNumber < secondNumber) {
-              hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
-            } else {
-              hasIncorrectAnswer(bet, answer, continuation);
-            }
-            break;
+            case "1":
+              if (firstNumber < secondNumber) {
+                hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+              } else {
+                hasIncorrectAnswer(bet, answer, continuation);
+              }
+              break;
 
-          case "2":
-            if (firstNumber > secondNumber) {
-              hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
-            } else {
-              hasIncorrectAnswer(bet, answer, continuation);
-            }
-            break;
+            case "2":
+              if (firstNumber > secondNumber) {
+                hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+              } else {
+                hasIncorrectAnswer(bet, answer, continuation);
+              }
+              break;
 
-          case "3":
-            if (firstNumber == secondNumber) {
-              hasCorrectAnswer(bet, SAME_ODDS, continuation, answer);
-            } else {
-              hasIncorrectAnswer(bet, answer, continuation);
-            }
-            break;
+            case "3":
+              if (firstNumber == secondNumber) {
+                hasCorrectAnswer(bet, SAME_ODDS, continuation, answer);
+              } else {
+                hasIncorrectAnswer(bet, answer, continuation);
+              }
+              break;
           }
         } while (continuation.getShouldContinueBet());
 

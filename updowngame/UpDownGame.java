@@ -39,7 +39,6 @@ public class UpDownGame {
           System.out.println("ANSWER : " + secondNumber);
 
           switch (answer.getAnswer()) {
-
           case "1":
             if (firstNumber < secondNumber) {
               hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
@@ -63,7 +62,6 @@ public class UpDownGame {
               hasIncorrectAnswer(bet, answer, continuation);
             }
             break;
-
           }
         } while (continuation.getShouldContinueBet());
 

@@ -18,7 +18,8 @@ public class UpDownGame {
   }
 
   public void startGame() {
-    int firstNumber, secondNumber; // 問題の数字1, 2
+    int firstNumber = 0;
+    int secondNumber = 0; // 問題の数字1, 2
 
     Continuation continuation = new Continuation();
     while (continuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
@@ -27,50 +28,53 @@ public class UpDownGame {
       try {
         Bet bet = new Bet(MAX_BET_GOLD, wallet);
 
-        do {
-
-          Random random = new Random(); // 1つめの数字生成
-          firstNumber = random.nextInt(13) + 1;
-          System.out.println("NUMBER : " + firstNumber);
-
-          Answer answer = new Answer();
-
-          secondNumber = random.nextInt(13) + 1; // 2つめの数字生成
-          System.out.println("ANSWER : " + secondNumber);
-
-          switch (answer.getAnswer()) {
-            case "1":
-              if (firstNumber < secondNumber) {
-                hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
-              } else {
-                hasIncorrectAnswer(bet, answer, continuation);
-              }
-              break;
-
-            case "2":
-              if (firstNumber > secondNumber) {
-                hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
-              } else {
-                hasIncorrectAnswer(bet, answer, continuation);
-              }
-              break;
-
-            case "3":
-              if (firstNumber == secondNumber) {
-                hasCorrectAnswer(bet, SAME_ODDS, continuation, answer);
-              } else {
-                hasIncorrectAnswer(bet, answer, continuation);
-              }
-              break;
-          }
-        } while (continuation.getShouldContinueBet());
-
+        playGame(firstNumber, secondNumber, bet, continuation);
+        while (continuation.getShouldContinueBet()) {
+          playGame(firstNumber, secondNumber, bet, continuation);
+        }
       } catch (IOException e) {
         System.out.println(e);
       }
     }
 
     endGame(wallet);
+  }
+
+  private void playGame(int firstNumber, int secondNumber, Bet bet, Continuation continuation) {
+    Random random = new Random(); // 1つめの数字生成
+    firstNumber = random.nextInt(13) + 1;
+    System.out.println("NUMBER : " + firstNumber);
+
+    Answer answer = new Answer();
+
+    secondNumber = random.nextInt(13) + 1; // 2つめの数字生成
+    System.out.println("ANSWER : " + secondNumber);
+
+    switch (answer.getAnswer()) {
+      case "1":
+        if (firstNumber < secondNumber) {
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+        } else {
+          hasIncorrectAnswer(bet, answer, continuation);
+        }
+        break;
+
+      case "2":
+        if (firstNumber > secondNumber) {
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+        } else {
+          hasIncorrectAnswer(bet, answer, continuation);
+        }
+        break;
+
+      case "3":
+        if (firstNumber == secondNumber) {
+          hasCorrectAnswer(bet, SAME_ODDS, continuation, answer);
+        } else {
+          hasIncorrectAnswer(bet, answer, continuation);
+        }
+        break;
+    }
   }
 
   private void hasCorrectAnswer(Bet bet, int odds, Continuation continuation, Answer answer) {

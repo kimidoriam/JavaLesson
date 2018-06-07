@@ -21,14 +21,15 @@ public class UpDownGame {
     int firstNumber = 0;
     int secondNumber = 0; // 問題の数字1, 2
 
-    Continuation continuation = new Continuation();
-    while (continuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
+    GameContinuation gameContinuation = new GameContinuation();
+    BetContinuation betContinuation = new BetContinuation();
+    while (gameContinuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
       System.out.println("現在の所持金：" + wallet + "G");
 
       try {
         Bet bet = new Bet(MAX_BET_GOLD, wallet);
 
-        playGame(firstNumber, secondNumber, bet, continuation);
+        playGame(firstNumber, secondNumber, bet, gameContinuation, betContinuation);
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -37,7 +38,8 @@ public class UpDownGame {
     endGame(wallet);
   }
 
-  private void playGame(int firstNumber, int secondNumber, Bet bet, Continuation continuation) {
+  private void playGame(int firstNumber, int secondNumber, Bet bet, GameContinuation gameContinuation,
+      BetContinuation betContinuation) {
     Random random = new Random(); // 1つめの数字生成
     firstNumber = random.nextInt(13) + 1;
     System.out.println("NUMBER : " + firstNumber);
@@ -50,51 +52,52 @@ public class UpDownGame {
     switch (answer.getAnswer()) {
       case "1":
         if (firstNumber < secondNumber) {
-          hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, gameContinuation, answer, betContinuation);
         } else {
-          hasIncorrectAnswer(bet, answer, continuation);
+          hasIncorrectAnswer(bet, answer, betContinuation);
         }
         break;
 
       case "2":
         if (firstNumber > secondNumber) {
-          hasCorrectAnswer(bet, UP_DOWN_ODDS, continuation, answer);
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, gameContinuation, answer, betContinuation);
         } else {
-          hasIncorrectAnswer(bet, answer, continuation);
+          hasIncorrectAnswer(bet, answer, betContinuation);
         }
         break;
 
       case "3":
         if (firstNumber == secondNumber) {
-          hasCorrectAnswer(bet, SAME_ODDS, continuation, answer);
+          hasCorrectAnswer(bet, SAME_ODDS, gameContinuation, answer, betContinuation);
         } else {
-          hasIncorrectAnswer(bet, answer, continuation);
+          hasIncorrectAnswer(bet, answer, betContinuation);
         }
         break;
     }
 
-    if (continuation.getShouldContinueBet()) {
-      playGame(firstNumber, secondNumber, bet, continuation);
+    if (betContinuation.getShouldContinueBet()) {
+      playGame(firstNumber, secondNumber, bet, gameContinuation, betContinuation);
     }
   }
 
-  private void hasCorrectAnswer(Bet bet, int odds, Continuation continuation, Answer answer) {
+  private void hasCorrectAnswer(Bet bet, int odds, GameContinuation gameContinuation, Answer answer,
+      BetContinuation betContinuation) {
     bet.multiplyBet(odds);
 
     if (bet.getBet() + wallet >= GAME_CLEAR_GOLD) {
-      this.wallet = continuation.finishGame(bet, wallet);
+      this.wallet = gameContinuation.finishGame(bet, wallet, betContinuation);
     } else {
-      continuation.shouldContinueBet();
+      betContinuation.shouldContinueBet();
 
-      if (!continuation.getShouldContinueBet()) {
+      if (!betContinuation.getShouldContinueBet()) {
         this.wallet += bet.getBet();
       }
     }
   }
 
-  private void hasIncorrectAnswer(Bet bet, Answer answer, Continuation continuation) {
+  private void hasIncorrectAnswer(Bet bet, Answer answer, BetContinuation betContinuation) {
     this.wallet = bet.subtractBet(wallet, bet.getBet());
-    continuation.setShouldContinueBet(false);
+    betContinuation.setShouldContinueBet(false);
   }
 
   private void endGame(int wallet) {

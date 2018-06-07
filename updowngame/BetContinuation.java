@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Continuation {
+public class BetContinuation {
   private boolean shouldContinueBet; // 正解したときのベット継続判定
 
-  public Continuation() {
+  public BetContinuation() {
     this.shouldContinueBet = true;
   }
 
@@ -17,17 +17,6 @@ public class Continuation {
 
   public void setShouldContinueBet(boolean shouldContinueBet) {
     this.shouldContinueBet = shouldContinueBet;
-  }
-
-  public int finishGame(Bet bet, int wallet) {
-    System.out.println("ベット額と所持金の合計が" + (bet.getBet() + wallet) + "Gになりました。");
-    wallet += bet.getBet();
-    setShouldContinueBet(false);
-    return wallet;
-  }
-
-  public boolean shouldContinueGame(int wallet, int GAME_OVER_GOLD, int GAME_CLEAR_GOLD) {
-    return !(wallet <= GAME_OVER_GOLD || wallet >= GAME_CLEAR_GOLD);
   }
 
   public void shouldContinueBet() {

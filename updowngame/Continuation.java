@@ -61,10 +61,6 @@ public class Continuation {
   }
 
   public boolean isValidChoice(String choice) {
-    if (!(choice.equals("y") || choice.equals("n"))) {
-      return false;
-    } else {
-      return true;
-    }
+    return (choice.equals("y") || choice.equals("n"));
   }
 }

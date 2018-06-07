@@ -27,11 +27,7 @@ public class Answer {
   }
 
   public boolean isValidAnswer() {
-    if ((answer.equals("1") || answer.equals("2") || answer.equals("3"))) {
-      return true;
-    } else {
-      return false;
-    }
+    return (answer.equals("1") || answer.equals("2") || answer.equals("3"));
   }
 
   public String getAnswer() {

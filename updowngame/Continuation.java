@@ -27,11 +27,7 @@ public class Continuation {
   }
 
   public boolean shouldContinueGame(int wallet, int GAME_OVER_GOLD, int GAME_CLEAR_GOLD) {
-    if (wallet <= GAME_OVER_GOLD || wallet >= GAME_CLEAR_GOLD) {
-      return false;
-    } else {
-      return true;
-    }
+    return !(wallet <= GAME_OVER_GOLD || wallet >= GAME_CLEAR_GOLD);
   }
 
   public void shouldContinueBet() {

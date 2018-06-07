@@ -29,9 +29,6 @@ public class UpDownGame {
         Bet bet = new Bet(MAX_BET_GOLD, wallet);
 
         playGame(firstNumber, secondNumber, bet, continuation);
-        while (continuation.getShouldContinueBet()) {
-          playGame(firstNumber, secondNumber, bet, continuation);
-        }
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -74,6 +71,10 @@ public class UpDownGame {
           hasIncorrectAnswer(bet, answer, continuation);
         }
         break;
+    }
+
+    if (continuation.getShouldContinueBet()) {
+      playGame(firstNumber, secondNumber, bet, continuation);
     }
   }
 

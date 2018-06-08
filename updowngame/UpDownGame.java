@@ -97,7 +97,6 @@ public class UpDownGame {
   private BetContinuation hasIncorrectAnswer(Bet bet, Answer answer) {
     BetContinuation betContinuation = new BetContinuation();
     this.wallet = bet.subtractBet(wallet, bet.getBet());
-    betContinuation.setShouldContinueBet(false);
     return betContinuation;
   }
 

@@ -8,7 +8,7 @@ public class BetContinuation {
   private boolean shouldContinueBet; // 正解したときのベット継続判定
 
   public BetContinuation() {
-    this.shouldContinueBet = true;
+    this.shouldContinueBet = false;
   }
 
   public boolean shouldContinueBet() {

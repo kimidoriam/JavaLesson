@@ -21,15 +21,14 @@ public class UpDownGame {
     int firstNumber = 0;
     int secondNumber = 0; // 問題の数字1, 2
 
-    GameContinuation gameContinuation = new GameContinuation();
     BetContinuation betContinuation = new BetContinuation();
-    while (gameContinuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
+    while (GameContinuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
       System.out.println("現在の所持金：" + wallet + "G");
 
       try {
         Bet bet = new Bet(MAX_BET_GOLD, wallet);
 
-        playGame(firstNumber, secondNumber, bet, gameContinuation, betContinuation);
+        playGame(firstNumber, secondNumber, bet, betContinuation);
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -38,8 +37,7 @@ public class UpDownGame {
     endGame(wallet);
   }
 
-  private void playGame(int firstNumber, int secondNumber, Bet bet, GameContinuation gameContinuation,
-      BetContinuation betContinuation) {
+  private void playGame(int firstNumber, int secondNumber, Bet bet, BetContinuation betContinuation) {
     Random random = new Random(); // 1つめの数字生成
     firstNumber = random.nextInt(13) + 1;
     System.out.println("NUMBER : " + firstNumber);
@@ -52,7 +50,7 @@ public class UpDownGame {
     switch (answer.getAnswer()) {
       case "1":
         if (firstNumber < secondNumber) {
-          hasCorrectAnswer(bet, UP_DOWN_ODDS, gameContinuation, answer, betContinuation);
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, answer, betContinuation);
         } else {
           hasIncorrectAnswer(bet, answer, betContinuation);
         }
@@ -60,7 +58,7 @@ public class UpDownGame {
 
       case "2":
         if (firstNumber > secondNumber) {
-          hasCorrectAnswer(bet, UP_DOWN_ODDS, gameContinuation, answer, betContinuation);
+          hasCorrectAnswer(bet, UP_DOWN_ODDS, answer, betContinuation);
         } else {
           hasIncorrectAnswer(bet, answer, betContinuation);
         }
@@ -68,7 +66,7 @@ public class UpDownGame {
 
       case "3":
         if (firstNumber == secondNumber) {
-          hasCorrectAnswer(bet, SAME_ODDS, gameContinuation, answer, betContinuation);
+          hasCorrectAnswer(bet, SAME_ODDS, answer, betContinuation);
         } else {
           hasIncorrectAnswer(bet, answer, betContinuation);
         }
@@ -76,16 +74,15 @@ public class UpDownGame {
     }
 
     if (betContinuation.getShouldContinueBet()) {
-      playGame(firstNumber, secondNumber, bet, gameContinuation, betContinuation);
+      playGame(firstNumber, secondNumber, bet, betContinuation);
     }
   }
 
-  private void hasCorrectAnswer(Bet bet, int odds, GameContinuation gameContinuation, Answer answer,
-      BetContinuation betContinuation) {
+  private void hasCorrectAnswer(Bet bet, int odds, Answer answer, BetContinuation betContinuation) {
     bet.multiplyBet(odds);
 
     if (bet.getBet() + wallet >= GAME_CLEAR_GOLD) {
-      this.wallet = gameContinuation.finishGame(bet, wallet, betContinuation);
+      this.wallet = GameContinuation.finishGame(bet, wallet, betContinuation);
     } else {
       betContinuation.shouldContinueBet();
 

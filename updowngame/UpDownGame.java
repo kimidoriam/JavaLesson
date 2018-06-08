@@ -73,7 +73,7 @@ public class UpDownGame {
         break;
     }
 
-    if (betContinuation.getShouldContinueBet()) {
+    if (betContinuation.shouldContinueBet()) {
       playGame(firstNumber, secondNumber, bet);
     }
   }
@@ -85,9 +85,9 @@ public class UpDownGame {
     if (bet.getBet() + wallet >= GAME_CLEAR_GOLD) {
       this.wallet = GameContinuation.finishGame(bet, wallet, betContinuation);
     } else {
-      betContinuation.shouldContinueBet();
+      betContinuation.askContinueBet();
 
-      if (!betContinuation.getShouldContinueBet()) {
+      if (!betContinuation.shouldContinueBet()) {
         this.wallet += bet.getBet();
       }
     }

@@ -11,7 +11,7 @@ public class BetContinuation {
     this.shouldContinueBet = true;
   }
 
-  public boolean getShouldContinueBet() {
+  public boolean shouldContinueBet() {
     return shouldContinueBet;
   }
 
@@ -19,7 +19,7 @@ public class BetContinuation {
     this.shouldContinueBet = shouldContinueBet;
   }
 
-  public void shouldContinueBet() {
+  public void askContinueBet() {
     String choice = ""; // 選択肢
 
     while (!isValidChoice(choice)) {

@@ -46,7 +46,7 @@ public class UpDownGame {
     secondNumber = random.nextInt(13) + 1; // 2つめの数字生成
     System.out.println("ANSWER : " + secondNumber);
 
-    BetContinuation betContinuation = new BetContinuation();
+    BetContinuation betContinuation = null;
     switch (answer.getAnswer()) {
       case "1":
         if (firstNumber < secondNumber) {

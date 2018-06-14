@@ -66,25 +66,25 @@ public class UpDownGame {
     switch (answer.getAnswer()) {
       case "1":
         if (firstNumber < secondNumber) {
-          betContinuation = hasCorrectAnswer(bet, UP_DOWN_ODDS, answer);
+          betContinuation = hasCorrectAnswer(bet, UP_DOWN_ODDS);
         } else {
-          betContinuation = hasIncorrectAnswer(bet, answer);
+          betContinuation = hasIncorrectAnswer(bet);
         }
         break;
 
       case "2":
         if (firstNumber > secondNumber) {
-          betContinuation = hasCorrectAnswer(bet, UP_DOWN_ODDS, answer);
+          betContinuation = hasCorrectAnswer(bet, UP_DOWN_ODDS);
         } else {
-          betContinuation = hasIncorrectAnswer(bet, answer);
+          betContinuation = hasIncorrectAnswer(bet);
         }
         break;
 
       case "3":
         if (firstNumber == secondNumber) {
-          betContinuation = hasCorrectAnswer(bet, SAME_ODDS, answer);
+          betContinuation = hasCorrectAnswer(bet, SAME_ODDS);
         } else {
-          betContinuation = hasIncorrectAnswer(bet, answer);
+          betContinuation = hasIncorrectAnswer(bet);
         }
         break;
     }
@@ -101,11 +101,9 @@ public class UpDownGame {
    *          ベットしている金額
    * @param odds
    *          オッズ
-   * @param answer
-   *          選んだ答え
    * @return ベットを継続する場合trueを返す
    */
-  private BetContinuation hasCorrectAnswer(Bet bet, int odds, Answer answer) {
+  private BetContinuation hasCorrectAnswer(Bet bet, int odds) {
     BetContinuation betContinuation = new BetContinuation();
     bet.multiplyBet(odds);
 
@@ -126,11 +124,9 @@ public class UpDownGame {
    * 
    * @param bet
    *          ベットしている金額
-   * @param answer
-   *          選んだ答え
    * @return ベットを継続する場合trueを返す
    */
-  private BetContinuation hasIncorrectAnswer(Bet bet, Answer answer) {
+  private BetContinuation hasIncorrectAnswer(Bet bet) {
     BetContinuation betContinuation = new BetContinuation();
     this.wallet = bet.subtractBet(wallet, bet.getBet());
     return betContinuation;

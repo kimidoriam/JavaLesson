@@ -24,16 +24,13 @@ public class UpDownGame {
    * 所持金を表示し、ベット額を決めてゲームを始めるメソッドです。
    */
   public void startGame() {
-    int firstNumber = 0;
-    int secondNumber = 0; // 問題の数字1, 2
-
     while (GameContinuation.shouldContinueGame(wallet, GAME_OVER_GOLD, GAME_CLEAR_GOLD)) {
       System.out.println("現在の所持金：" + wallet + "G");
 
       try {
         Bet bet = new Bet(MAX_BET_GOLD, wallet);
 
-        playGame(firstNumber, secondNumber, bet);
+        playGame(bet);
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -45,14 +42,13 @@ public class UpDownGame {
   /**
    * 数字を生成し、答えを判定するメソッドです。
    * 
-   * @param firstNumber
-   *          1つめの数字
-   * @param secondNumber
-   *          2つめの数字
    * @param bet
    *          ベットしている金額
    */
-  private void playGame(int firstNumber, int secondNumber, Bet bet) {
+  private void playGame(Bet bet) {
+    int firstNumber = 0;
+    int secondNumber = 0; // 問題の数字1, 2
+
     Random random = new Random(); // 1つめの数字生成
     firstNumber = random.nextInt(13) + 1;
     System.out.println("NUMBER : " + firstNumber);
@@ -90,7 +86,7 @@ public class UpDownGame {
     }
 
     if (betContinuation.shouldContinueBet()) {
-      playGame(firstNumber, secondNumber, bet);
+      playGame(bet);
     }
   }
 

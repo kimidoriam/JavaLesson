@@ -4,9 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * 答えを決めるクラスです。
+ */
 public class Answer {
   private String answer = ""; // 回答
 
+  /**
+   * 答えを入力するコンストラクタです。
+   */
   public Answer() {
     while (!isValidAnswer()) {
 
@@ -26,6 +32,11 @@ public class Answer {
     }
   }
 
+  /**
+   * 答えが適正かどうか判定するメソッドです。
+   * 
+   * @return 答えが適正の場合trueを返す
+   */
   public boolean isValidAnswer() {
     return (answer.equals("1") || answer.equals("2") || answer.equals("3"));
   }

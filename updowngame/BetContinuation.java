@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * ベットの継続を決めるクラスです。
+ */
 public class BetContinuation {
   private boolean shouldContinueBet; // 正解したときのベット継続判定
 
@@ -19,6 +22,9 @@ public class BetContinuation {
     this.shouldContinueBet = shouldContinueBet;
   }
 
+  /**
+   * ベットを継続するかどうか選択するメソッドです。
+   */
   public void askContinueBet() {
     String choice = ""; // 選択肢
 
@@ -45,6 +51,13 @@ public class BetContinuation {
     }
   }
 
+  /**
+   * 選択が適正かどうか判定するメソッドです。
+   * 
+   * @param choice
+   *          選択肢
+   * @return 選択が適正の場合trueを返す
+   */
   public boolean isValidChoice(String choice) {
     return (choice.equals("y") || choice.equals("n"));
   }

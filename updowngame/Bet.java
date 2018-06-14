@@ -4,9 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * ベット額を決めたり、増減させるクラスです。
+ */
 public class Bet {
   private int bet = 0; // ベット額
 
+  /**
+   * ベット額を入力するコンストラクタです。
+   * 
+   * @param maxBetGold
+   * @param wallet
+   * @throws IOException
+   */
   public Bet(int maxBetGold, int wallet) throws IOException {
     while (!isValidBet(maxBetGold, wallet)) {
 
@@ -31,6 +41,15 @@ public class Bet {
     }
   }
 
+  /**
+   * ベット額が適正かどうか判定するメソッドです。
+   * 
+   * @param maxBetGold
+   *          1回にベットできる上限額
+   * @param wallet
+   *          プレイヤーの所持金
+   * @return ベット額が適正の場合trueを返す
+   */
   public boolean isValidBet(int maxBetGold, int wallet) {
     if (bet > maxBetGold) {
       return false;
@@ -47,12 +66,27 @@ public class Bet {
     return bet;
   }
 
+  /**
+   * ベット額をオッズに応じて増やすメソッドです。
+   * 
+   * @param x
+   *          オッズ
+   */
   public void multiplyBet(int x) {
     System.out.println("正解！ベット額が" + x + "倍になります。");
     this.bet *= x;
     System.out.println("現在のベット額：" + bet + "G");
   }
 
+  /**
+   * ベット額を所持金から没収するメソッドです。
+   * 
+   * @param wallet
+   *          プレイヤーの所持金
+   * @param bet
+   *          ベット額
+   * @return プレイヤーの所持金を返す
+   */
   public int subtractBet(int wallet, int bet) {
     System.out.println("不正解！ベット額を没収します。");
     wallet -= bet;
